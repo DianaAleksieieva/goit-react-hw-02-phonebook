@@ -18,13 +18,22 @@ export default class App extends React.Component {
       number: contsctInfo.number
     }
     console.log(this.state.contacts.name === contsctInfo.name)
-    this.state.contacts.map(
-      ({ name }) => ((contsctInfo.name === name) ?
-        alert(name + "is already in contacts") :
-        this.setState(prevState => ({
-      contacts: [newContact, ...prevState.contacts] })))
-    )
+    const isNameExist = this.state.contacts.find(({ name }) => contsctInfo.name === name);
+
+    if (isNameExist) {
+      alert(`${ contsctInfo.name }is already in contacts`);
+    } else {
+      this.setState((prevState) => ({
+        contacts: [ newContact, ...prevState.contacts ] }));
+    }
+  
   }
+   deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+  
 
 changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
@@ -46,7 +55,7 @@ changeFilter = event => {
       <Form onSubmit={this.addContact} contactsBook={contacts} />
       <h2>Contacts</h2>
       
-      <ContactList contacts={filteredContacts}/>
+      <ContactList contacts={filteredContacts}  deleteContact={this.deleteContact}/>
       <Filter value={filter} onChange={this.changeFilter} />
     </Container>
   }

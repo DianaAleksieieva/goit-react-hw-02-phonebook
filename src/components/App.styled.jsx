@@ -19,3 +19,10 @@ export const P = styled.p`
 font-size: 20px;
 display:inline-block;
 margin:0px;`
+export const DeleteButton = styled.button`
+margin-left:10px;
+background-color:black;
+color:white;
+border:0px;
+cursor:pointer;
+`
