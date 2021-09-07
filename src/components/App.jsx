@@ -17,10 +17,9 @@ export default class App extends React.Component {
       name: contsctInfo.name,
       number: contsctInfo.number
     }
-    console.log(this.state.contacts.name !== contsctInfo.name)
-
+    console.log(this.state.contacts.name === contsctInfo.name)
     this.state.contacts.map(
-      ({ name }) => (contsctInfo.name === name ?
+      ({ name }) => ((contsctInfo.name === name) ?
         alert(name + "is already in contacts") :
         this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts] })))
